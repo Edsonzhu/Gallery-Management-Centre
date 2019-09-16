@@ -1,40 +1,65 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
+MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon } from "mdbreact";
 
-const NavBar = () => {
+class NavBar extends Component {
+constructor(props) {
+  super(props);
+  this.state = {
+    isOpen: false,
+  };
+}
+
+toggleCollapse = () => {
+  this.setState({ isOpen: !this.state.isOpen });
+}
+
+render() {
   return (
-    <nav className="navbar navbar-inverse navbar-fixed-top">
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <Link to="/" className="navbar-brand">
-            Gallery
-          </Link>
-        </div>
-        <ul className="nav navbar-nav">
-          <Link to="/" className="navbar-brand">
-            Home
-          </Link>
-          <Link to="/users" className="navbar-brand">
-            Users
-          </Link>
-          <Link to="/albums" className="navbar-brand">
-            Albums
-          </Link>
-          <Link to="/photos" className="navbar-brand">
-            Photos
-          </Link>
-        </ul>
-        <ul className="nav navbar-nav navbar-right">
-          <Link to="#" className="navbar-brand">
-            <span className="glyphicon glyphicon-user"></span> Sign Up
-          </Link>
-          <Link to="#" className="navbar-brand">
-            <span className="glyphicon glyphicon-log-in"></span> Login
-          </Link>
-        </ul>
-      </div>
-    </nav>
+    <MDBNavbar color="primary-color-dark" dark expand="md" fixed="top">
+      <MDBNavbarBrand>
+        <strong className="white-text">Gallery</strong>
+      </MDBNavbarBrand>
+      <MDBNavbarToggler onClick={this.toggleCollapse} />
+      <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+        <MDBNavbarNav left>
+          <MDBNavItem active={this.props.navHighlight === "home"}>
+            <MDBNavLink to="/">Home</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem active={this.props.navHighlight === "users"}>
+            <MDBNavLink to="/users">Users</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem active={this.props.navHighlight === "albums"}>
+            <MDBNavLink to="/albums">Albums</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem active={this.props.navHighlight === "photos"}>
+            <MDBNavLink to="/photos">Photos</MDBNavLink>
+          </MDBNavItem>
+        </MDBNavbarNav>
+        <MDBNavbarNav right>
+          {/* FAZER COM QUE O SING UP E LOGIN SO APARECAM SE O USUARIO ESTIVER LOGGED OFF */}
+          <MDBNavItem>
+            <MDBNavLink to="/login">
+            <MDBIcon icon="sign-in-alt" /> Sign In</MDBNavLink>
+          </MDBNavItem>
+          {/* <MDBNavItem>       FAZER COM QUE ESSE SO APARECA SE O USUARIO ESTIVER LOGGED ON
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <MDBIcon icon="user" />
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="dropdown-default">
+                <MDBDropdownItem href="#!">Action</MDBDropdownItem>
+                <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
+                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>      <MDBIcon icon="sign-out-alt" />   <MDBIcon icon="user-circle" />      */}
+        </MDBNavbarNav>
+      </MDBCollapse>
+    </MDBNavbar>
   );
+  }
 }
 
 export default NavBar;

@@ -5,7 +5,7 @@ import MainContainer from './mainContainer';
 
 const Photos = (props) => {
   return (
-    <MainContainer>
+    <MainContainer navHighlight="photos">
     <h1 className="page-header">Photos</h1>
 		<table className="table table-image">
 		  <thead>

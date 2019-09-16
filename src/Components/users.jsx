@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import MainContainer from './mainContainer';
+import SearchPage from './searchPage';
 
 const Users = (props) => {
   return (
-    <MainContainer>
+    <MainContainer navHighlight="users">
       <h1 className="page-header">Users</h1>
+      <SearchPage />
       <table className="table table-striped table-bordered">
         <thead>
           <tr>

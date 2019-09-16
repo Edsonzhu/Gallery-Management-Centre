@@ -5,7 +5,7 @@ import MainContainer from './mainContainer';
 
 const Albums = (props) => {
   return (
-    <MainContainer>
+    <MainContainer navHighlight="albums">
       <h1 className="page-header">Albums</h1>
       <table className="table table-striped table-bordered">
         <thead>

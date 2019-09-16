@@ -74,3 +74,10 @@ body {
   margin-bottom:0px;
 }
 
+.row > div {
+  padding: 1rem;
+  background-color: #33b5e5;
+  border: 2px solid #fff;
+  color: #fff;
+  text-align: center;
+}

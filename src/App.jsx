@@ -76,6 +76,7 @@ class App extends Component {
           />
         )} />
 
+        {/* TODO : /login routes and components (inside the sign in components has another link to sign up) */}
       </Switch>
     );
   }
