@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { MDBContainer } from 'mdbreact';
 
 import NavBar from './navBar';
@@ -8,14 +8,16 @@ import '../index.css';
 class MainContainer extends Component {
   render() {
     return (
-      <MDBContainer>
-        <NavBar navHighlight={this.props.navHighlight} />
-        <br />
-        {this.props.children}
-        <br />
+      <Fragment>
+        <MDBContainer>
+          <br />
+          <NavBar navHighlight={this.props.navHighlight} />
+          {this.props.children}
+          <br />
+        </MDBContainer>
         <Footer />
-      </MDBContainer>
-    )
+      </Fragment>
+    );
   } 
 }
 

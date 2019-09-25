@@ -11,7 +11,6 @@ import Photos from './Components/photos';
 import Photo from './Components/photo';
 import User from './Components/user';
 
-
 //import NotFound from './Components/notFound';
 
 class App extends Component {
@@ -20,28 +19,64 @@ class App extends Component {
     this.state = {
       users: [],
       albums: [],
-      photos: []
+      photos: [],
+      filteredUsers: [],
+      filteredAlbums: [],
+      filteredPhotos: []
     };
   }
 
   componentDidMount() {
     fetchUsers()
-    .then(res => this.setState({ users: res.data }));
+    .then(res => this.setState({ users: res.data, filteredUsers: res.data }));
 
     fetchAlbums()
-    .then(res => this.setState({ albums: res.data }));
+    .then(res => this.setState({ albums: res.data, filteredAlbums: res.data }));
     
     fetchPhotos()
-    .then(res => this.setState({ photos: res.data }));
+    .then(res => this.setState({ photos: res.data , filteredPhotos: res.data }));
+  }
+
+  //handleSomething
+  handleFilter = (event) => {    
+    let exp = event.target.value.toLowerCase();
+
+    let filteredUsers = this.state.users.filter((user) => {
+      return (user.name.toLowerCase().includes(exp));
+    });
+    let filteredAlbums = this.state.albums.filter((album) => {
+      return (album.title.toLowerCase().includes(exp));
+    });
+    let filteredPhotos = this.state.photos.filter((photo) => {
+      return (photo.title.toLowerCase().includes(exp));
+    });
+
+    this.setState({ filteredUsers, filteredAlbums, filteredPhotos });
+  }
+
+  handleResetFilter = () => {
+    this.setState({ filteredUsers: this.state.users, filteredAlbums: this.state.albums, filteredPhotos: this.state.photos });
   }
 
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' render={() => (
+          <Home 
+          onReset={this.handleResetFilter}
+          onFilter={this.handleFilter}
+          albums={this.state.filteredAlbums} 
+          users={this.state.filteredUsers}
+          photos={this.state.filteredPhotos} 
+          />
+        )} />
 
         <Route exact path='/users' render={() => (
-          <Users users={this.state.users} />
+          <Users 
+          onReset={this.handleResetFilter}
+          onFilter={this.handleFilter}
+          users={this.state.filteredUsers} 
+          />
         )} />
 
         <Route exact path='/users/:userId' render={(props) => (
@@ -52,7 +87,9 @@ class App extends Component {
         
         <Route exact path='/albums' render={() => (
           <Albums 
-          albums={this.state.albums} 
+          onReset={this.handleResetFilter}
+          onFilter={this.handleFilter}
+          albums={this.state.filteredAlbums} 
           users={this.state.users}
           />
         )} />
@@ -65,8 +102,10 @@ class App extends Component {
 
         <Route exact path='/photos' render={() => (
           <Photos 
-          photos={this.state.photos} 
-          albums={this.state.albums}
+          onReset={this.handleResetFilter}
+          onFilter={this.handleFilter}
+          albums={this.state.albums} 
+          photos={this.state.filteredPhotos} 
           />
         )} />
 

@@ -23,16 +23,16 @@ render() {
       <MDBNavbarToggler onClick={this.toggleCollapse} />
       <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
         <MDBNavbarNav left>
-          <MDBNavItem active={this.props.navHighlight === "home"}>
+          <MDBNavItem active={this.props.navHighlight === "Home"}>
             <MDBNavLink to="/">Home</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={this.props.navHighlight === "users"}>
-            <MDBNavLink to="/users">Users</MDBNavLink>
+          <MDBNavItem active={this.props.navHighlight === "Users"}>
+            <MDBNavLink to="/users">Photographer</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={this.props.navHighlight === "albums"}>
+          <MDBNavItem active={this.props.navHighlight === "Albums"}>
             <MDBNavLink to="/albums">Albums</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={this.props.navHighlight === "photos"}>
+          <MDBNavItem active={this.props.navHighlight === "Photos"}>
             <MDBNavLink to="/photos">Photos</MDBNavLink>
           </MDBNavItem>
         </MDBNavbarNav>

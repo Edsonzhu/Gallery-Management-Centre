@@ -11,7 +11,6 @@ class User extends Component {
       user: [],
       albums: []
     };
-    
   }
 
   componentDidMount() {
